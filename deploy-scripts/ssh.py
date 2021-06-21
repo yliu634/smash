@@ -7,12 +7,12 @@ class MyThread(threading.Thread):
     super().__init__()
   
   def run(self):
-    subprocess.check_output(["ssh", "node-%d" % i, " ".join(sys.argv[1:])])
+    subprocess.check_output(["ssh", "machine%d" % i, " ".join(sys.argv[1:])])
 
 
 threads = []
 for i in range(0, 10):
-  host = "node-%d" % i
+  host = "machine%d" % i
   threads.append(MyThread())
 
 for t in threads:
