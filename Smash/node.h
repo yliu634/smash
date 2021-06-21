@@ -157,9 +157,9 @@ public:
     string host = boost::asio::ip::host_name();
     
     int id = -1;
-    if (host.find("node-") != 0) {
+    if (host.find("machine") != 0) {
       try {
-        string ids = host.substr(string("node-").length());
+        string ids = host.substr(string("machine").length());
         id = atoi(ids.c_str());
       } catch (exception &e) {
         id = -1;
