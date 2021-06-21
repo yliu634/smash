@@ -102,7 +102,7 @@ class MyThread(threading.Thread):
           n = proxy.now()
           print("[" + now() + "] " + host + " time: " + n)
         elif sys.argv[offset] == "send":
-          if (host == 'node-0'): return
+          if (host == 'machine1'): return
           for i in range(offset + 1, len(sys.argv)):
             fileName = sys.argv[i]
             s = read(fileName)
