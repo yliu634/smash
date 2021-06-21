@@ -481,7 +481,7 @@ public:
             build = thread([this, result, k, locations]() {
               Clocker c("rebuild");
               // build in the background. in the meantime, the fallback table will handle all updates
-              if (result.status == -1 || full_debug && (rand() & 1)) {
+              if (result.status == -1 || (full_debug && (rand() & 1))) {
                 ludo.locator.build();
               } else {
                 ludo.resizeCapacity(ludo.capacity + 1);  // will double
