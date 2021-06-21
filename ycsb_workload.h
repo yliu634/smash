@@ -88,7 +88,7 @@ public:
   
   YCSB(const string workload, int parallel = 1, int override_records = 1000) : parallel(parallel) {
     string host = boost::asio::ip::host_name();
-    string ids = host.substr(string("node-").length(), host.find('.'));
+    string ids = host.substr(string("machine").length(), host.find('.'));
     id = atoi(ids.c_str());
     cout << "host name: " << host << ", id: " << id << endl;
     
