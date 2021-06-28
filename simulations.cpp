@@ -52,7 +52,7 @@ int main(int argc, char **argv) {
     master_main(argc, argv);
   } else if (argv[1] == string("lookup")) {
     lookup_main(argc, argv);
-  } else if (argv[1] == string("storage")) {
+  } else if (argv[1] == string("storage")) {//fileName, port
     if (argc <= 3) return -1;
     storage_main(argc, argv);
   } else if (argv[1] == string("client")) {
