@@ -8,7 +8,7 @@ class Client : public Node {
 public:
   Client(uint16_t port = 0) : Node("Client", port) {
     SocketNode::silent = true;
-    requestTopo();
+    //requestTopo();
   }
 //  unordered_map<K, Locations> dynamicCache;  // the return from storage node should include the
 //
