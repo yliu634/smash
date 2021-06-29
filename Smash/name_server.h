@@ -83,6 +83,7 @@ public:
           ready = true;
           startRoutine();
           broadcastRegisterInfo();
+          std:: cout << "All here" << std::endl;
         }
       } else if (msgType == PullRegisterInfo) {
         if (ready) inform(addrPort);
