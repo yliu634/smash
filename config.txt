@@ -1,4 +1,4 @@
-localhost:9999
+machine1:9999
 3
 1
 1
