@@ -57,18 +57,21 @@ public:
         MasterNodeInfo info; info.in = true;
         memccpy(info.addrPort, addrPort.data(), 0, MAX_ADD_LEN);
         masters.push_back(info);
+        std::cout << "# masters is: " << masters.size() << std::endl;
       } else if (lookups.size() < nLookups && msgType == LookupRegister) {
         id = lookups.size();
         LookupNodeInfo info; info.in = true;
         memccpy(info.addrPort, addrPort.data(), 0, MAX_ADD_LEN);
         info.supportFilter = msg[2] == '1';
         lookups.emplace_back(info);
+        std::cout << "# lookups is: " << lookups.size() << std::endl;
       } else if (storages.size() < nStorages && msgType == StorageRegister) {
         id = storages.size();
         StorageNodeInfo info; info.in = true;
         memccpy(info.addrPort, addrPort.data(), 0, MAX_ADD_LEN);
         info.capacity = *(uint32_t *) (msg.data() + 2);
         storages.emplace_back(info);
+        std::cout << "# storages is: " << storages.size() << std::endl;
       } else {
         added = false;
       }
