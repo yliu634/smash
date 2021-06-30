@@ -10,10 +10,10 @@ sudo python3 -m pip install requests ceph-deploy pytz
 # rm /etc/hosts
 # echo '127.0.0.1       localhost loghost localhost.xmash.edgecut-pg0.wisc.cloudlab.us' >> /etc/hosts
 # echo '128.105.145.205 machine1' >> /etc/hosts
-echo '128.105.145.211 machine2' >> /etc/hosts
-echo '128.105.145.206 machine3' >> /etc/hosts
-echo '128.105.145.220 machine4' >> /etc/hosts
-service ssh start;
+sudo echo '128.105.145.211 machine2' >> /etc/hosts
+sudo echo '128.105.145.206 machine3' >> /etc/hosts
+sudo echo '128.105.145.220 machine4' >> /etc/hosts
+sudo service ssh start;
 git clone https://github.com/yliu634/Smash.git;
 cd Smash; mkdir release; cd release;
 cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -G "CodeBlocks - Unix Makefiles" ..;
