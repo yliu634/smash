@@ -50,7 +50,7 @@ def write(fileName, fileContent, ele):
            stat.S_IWUSR | stat.S_IWGRP | stat.S_IWOTH |
            stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
   if ele:
-    uid = pwd.getpwnam('Shouqian')[2]
+    uid = pwd.getpwnam('yiliu124')[2]
     os.setuid(uid)
   return ""
 
@@ -60,7 +60,7 @@ def read(fileName):
   f = open(fileName, "rb")
   s = base64.b64encode(f.read()).decode('utf-8')
   f.close()
-  uid = pwd.getpwnam('Shouqian')[2]
+  uid = pwd.getpwnam('yiliu124')[2]
   os.setuid(uid)
   return s
 
@@ -76,7 +76,7 @@ def clean():
       if port == conns.laddr.port:
         proc.send_signal(SIGTERM)
   
-  uid = pwd.getpwnam('Shouqian')[2]
+  uid = pwd.getpwnam('yiliu124')[2]
   os.setuid(uid)
 
 
@@ -146,7 +146,7 @@ class MyThread(threading.Thread):
     except Exception as e:
       print("------------Error on %s: ------------\n%s\n" % (host, str(e)))
     
-    uid = pwd.getpwnam('Shouqian')[2]
+    uid = pwd.getpwnam('yiliu124')[2]
     os.setuid(uid)
 
 
