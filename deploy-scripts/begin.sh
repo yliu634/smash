@@ -1,4 +1,3 @@
-#!/bin/bash
 sudo echo 'net.core.wmem_max=4194304' >> /etc/sysctl.conf
 sudo echo 'net.core.rmem_max=12582912' >> /etc/sysctl.conf
 sudo echo 'net.ipv4.tcp_rmem = 4096 87380 4194304' >> /etc/sysctl.conf
