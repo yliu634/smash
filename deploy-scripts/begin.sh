@@ -1,5 +1,3 @@
-#!/bin/bash
-
 sudo su
 
 echo 'net.core.wmem_max=4194304' >> /etc/sysctl.conf
