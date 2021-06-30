@@ -1,5 +1,3 @@
-sudo su
-
 echo 'net.core.wmem_max=4194304' >> /etc/sysctl.conf
 echo 'net.core.rmem_max=12582912' >> /etc/sysctl.conf
 echo 'net.ipv4.tcp_rmem = 4096 87380 4194304' >> /etc/sysctl.conf
@@ -8,7 +6,7 @@ sysctl -p
 
 apt update
 apt-mark hold grub*
-apt-get install -y librados-dev maven mlocate python3-pip google-perftools libgoogle-perftools-dev cmake build-essential gdb libssl-dev pkgconf tmux clang liblua5.3-dev libboost-all-dev
+apt-get install -y librados-dev maven mlocate python3-pip google-perftools libgoogle-perftools-dev cmake build-essential gdb libssl-dev pkgconf tmux clang liblua5.3-dev libboost-all-dev;
 python3 -m pip install requests ceph-deploy pytz
 
 # rm /etc/hosts
