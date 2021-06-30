@@ -19,7 +19,6 @@ git clone https://github.com/yliu634/Smash.git
 cd Smash; mkdir release; cd release
 cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -G "CodeBlocks - Unix Makefiles" ..
 make -j8
-
 #echo "" >> id_rsa_key.pub
 #cat id_rsa_key.pub >> ~/.ssh/authorized_keys
 #if [! -z $1]; 
@@ -31,5 +30,3 @@ make -j8
 #cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 #cat ~/.ssh/id_rsa.pub
 #fi
-
-
