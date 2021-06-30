@@ -174,7 +174,7 @@ if __name__ == "__main__":
       pass
     
     if not nodes:
-      nodes = list(range(10))
+      nodes = list(range(4))
     
     if sys.argv[1] == 'quit':
       nodes = [0]  # always only quit node 0
@@ -194,7 +194,7 @@ if __name__ == "__main__":
     
     threads = []
     for i in nodes:
-      host = "node-%d" % i
+      host = "machine%d" % i
       threads.append(MyThread(host, offset, sync, ele))
     
     for t in threads:
