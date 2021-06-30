@@ -18,14 +18,14 @@ echo '128.105.145.220 machine4' >> /etc/hosts
 service ssh start
 
 git clone https://github.com/yliu634/Smash.git
-cd Smash
+cd ~/Smash
 mkdir release
 cd release
 cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -G "CodeBlocks - Unix Makefiles" ..
 make -j8
 
-echo "" >> id_rsa_key.pub
-cat id_rsa_key.pub >> ~/.ssh/authorized_keys
+#echo "" >> id_rsa_key.pub
+#cat id_rsa_key.pub >> ~/.ssh/authorized_keys
 
 
 
