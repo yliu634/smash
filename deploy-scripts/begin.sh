@@ -7,9 +7,9 @@ sudo apt update
 sudo apt-mark hold grub*
 sudo apt-get install -y librados-dev maven mlocate python3-pip google-perftools libgoogle-perftools-dev cmake build-essential gdb libssl-dev pkgconf tmux clang liblua5.3-dev libboost-all-dev
 sudo python3 -m pip install requests ceph-deploy pytz
-rm /etc/hosts
-echo '127.0.0.1       localhost loghost localhost.xmash.edgecut-pg0.wisc.cloudlab.us' >> /etc/hosts
-echo '128.105.145.200 machine1' >> /etc/hosts
+sudo rm /etc/hosts
+sudo echo '127.0.0.1       localhost loghost localhost.xmash.edgecut-pg0.wisc.cloudlab.us' >> /etc/hosts
+sudo echo '128.105.145.200 machine1' >> /etc/hosts
 sudo echo '128.105.145.195 machine2' >> /etc/hosts
 sudo echo '128.105.145.198 machine3' >> /etc/hosts
 sudo echo '128.105.145.194 machine4' >> /etc/hosts
