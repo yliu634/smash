@@ -19,14 +19,14 @@ public:
   vector<K> keys;
   
   void loadKeys(uint32_t size) {
-    if (!filesystem::is_regular_file("../dist/keys.txt")) {
+    if (!filesystem::is_regular_file("dist/keys.txt")) {
       cerr << "Key file not present. " << endl;
       exit(-1);
     }
     
     cout << "loading keys" << endl;
     string key;
-    ifstream f("../dist/keys.txt");
+    ifstream f("dist/keys.txt");
     int i = 0;
     while (!f.eof() && keys.size() < size) {
       getline(f, key);
