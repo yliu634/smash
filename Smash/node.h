@@ -100,7 +100,7 @@ public:
   virtual int thisType() { return -1; }
   
   inline Node(string name, uint16_t port = 0) : SocketNode(name, port) {
-    ifstream f("../config.txt");
+    ifstream f("config.txt");
     f >> nameServer;
     
     f >> nReplicas;
