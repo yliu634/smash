@@ -129,7 +129,7 @@ public:
           p[0] = p[1];
           p[1] = p[2];
           p[2] = {uint32_t(-1), 0};
-          
+          cout << "and " << next.dId << endl;
           int followerFd = connectToServer(storages[next.dId].addrPort);
           my_write(followerFd, msgType, msg);
           result &= (get<2>(my_read(followerFd))[0] == 1);
