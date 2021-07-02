@@ -115,7 +115,7 @@ public:
       if (msgType == Insert || msgType == Remove) {
         Location *p = (Location *) msg.data();
         assert(p->dId == thisId);
-        
+        cout << "insert or remove received" << endl;
         if (msgType == Insert) {
           acc(p->blkId);
           mylock_guard g(locks[p->blkId % 8192]);
