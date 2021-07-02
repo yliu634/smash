@@ -96,7 +96,7 @@ public:
     Location *locs = (Location *) v.data();
     
     fd = connectToServer(storages[locs[0].dId].addrPort);
-    cout << "Insert to "<< locs[0].dId << " in client.h" << end;
+    cout << "Insert to "<< locs[0].dId << " in client.h" << endl;
     raw_write(fd, &type, 4);   // for efficiency
     raw_write(fd, &thisId, 4);
     
