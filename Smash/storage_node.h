@@ -157,7 +157,7 @@ public:
         uint32_t sBlkId = p[0];
         uint32_t dSId = p[1];
         uint32_t dBlkId = p[2];
-        
+        cout << "copy from me to " << p[1] << endl;
         Locations onlyFirst;
         onlyFirst.locs[0] = {dSId, dBlkId};
         
