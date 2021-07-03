@@ -937,6 +937,7 @@ inline Locations allocateDefaultLeave(const K &k, Master *_this, set<uint> &st, 
       
     while(!_this->storages[dId].in || st.count(dId) != 0){
       heap_fallback.push_back(dId);
+      cout << dId << "is not OK and is pop out." << endl;
       _this->leastLoaded.pop();
       /*if(_this->leastLoaded.size() < 3){
         perror("The storages number low.");
