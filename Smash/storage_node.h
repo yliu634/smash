@@ -171,7 +171,7 @@ public:
         return false;
       }
     } catch (exception &e) {
-    // log(e.what());
+      log(e.what());
     }
     
     return true;
