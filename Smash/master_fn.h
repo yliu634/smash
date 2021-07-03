@@ -959,8 +959,8 @@ inline Locations allocateDefaultLeave(const K &k, Master *_this, set<uint> &st, 
         heap_fallback.push_back(dId);
         cout << "no, did "<< dId <<" have this key" << endl;
         _this->leastLoaded.erase(dId);
-        cout << "Size: "<<leastLoaded.size()<< endl;
-        assert(leastLoaded.size() > 0);
+        cout << "Size: "<<_this->leastLoaded.size()<< endl;
+        assert(_this->leastLoaded.size() > 0);
         dId = _this->leastLoaded.top();
       }
       cout << "finally we choose " << dId << endl;
