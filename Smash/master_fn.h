@@ -935,7 +935,7 @@ inline Locations allocateDefaultLeave(const K &k, Master *_this, set<uint> &st, 
         std::cout << ' ' << *it;
     cout << endl;
       
-    while(!_this->storages[dId].in && st.count(dId) != 0){
+    while(!_this->storages[dId].in || st.count(dId) != 0){
       heap_fallback.push_back(dId);
       _this->leastLoaded.pop();
       /*if(_this->leastLoaded.size() < 3){
