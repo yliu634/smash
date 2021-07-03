@@ -943,7 +943,12 @@ inline Locations allocateDefaultLeave(const K &k, Master *_this, set<uint> &st, 
         perror("The storages number low.");
         debug_break();
       }*/
+      cout << "heap have: ";
+      for (auto it=_this->leastLoaded.begin(); it != _this->leastLoaded.end(); ++it)
+        std::cout << ' ' << *it;
+      
       dId = _this->leastLoaded.top();
+      cout << "The top element now is " << dId << endl;
     }
     cout << "finally we choose " << dId <<"because now st.count(): " << st.count(dId) << endl;
     for(const uint &el: heap_fallback){
