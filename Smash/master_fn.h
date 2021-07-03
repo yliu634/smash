@@ -957,8 +957,10 @@ inline Locations allocateDefaultLeave(const K &k, Master *_this, set<uint> &st, 
       vector<uint> heap_fallback;
       while(st.count(dId) != 0){
         heap_fallback.push_back(dId);
-        cout << "no, did"<< dId <<" have this key" << endl;
-        _this->leastLoaded.pop();
+        cout << "no, did "<< dId <<" have this key" << endl;
+        _this->leastLoaded.erase(dId);
+        cout << "Size: "<<leastLoaded.size()<< endl;
+        assert(leastLoaded.size() > 0);
         dId = _this->leastLoaded.top();
       }
       cout << "finally we choose " << dId << endl;
