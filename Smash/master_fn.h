@@ -943,9 +943,10 @@ inline Locations allocateDefaultLeave(const K &k, Master *_this, set<uint> &st, 
         perror("The storages number low.");
         debug_break();
       }*/
-      cout << "heap have: ";
+      cout << "heap 1 have: ";
       for (auto it=_this->leastLoaded.begin(); it != _this->leastLoaded.end(); ++it)
         std::cout << ' ' << *it;
+      cout << endl;
       
       dId = _this->leastLoaded.top();
       cout << "The top element now is " << dId << endl;
@@ -957,8 +958,12 @@ inline Locations allocateDefaultLeave(const K &k, Master *_this, set<uint> &st, 
       _this->leastLoaded.push(el);
     }
     cout << endl;
-    cout << "Now the queue size: "<< _this->leastLoaded.size() << endl;
-      
+    
+    cout << "heap 1 have: ";
+    for (auto it=_this->leastLoaded.begin(); it != _this->leastLoaded.end(); ++it)
+    std::cout << ' ' << *it;
+    cout << endl;
+    
     pair <uint, uint> &load = _this->loadInfo[dId];
     
     
