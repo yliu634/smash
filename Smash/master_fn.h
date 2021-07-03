@@ -895,7 +895,7 @@ inline Locations allocateDefault(const K &k, Master *_this, uint8_t count) {
     pair <uint, uint> &load = _this->loadInfo[dId];
     
     
-    if (!_this->storages[dId].in) continue;
+    //if (!_this->storages[dId].in) continue;
     if (load.first >= load.second) break;
     _this->leastLoaded.pop();
     
