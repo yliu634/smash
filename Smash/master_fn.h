@@ -969,7 +969,7 @@ inline Locations allocateDefaultLeave(const K &k, Master *_this, set<uint> &st, 
     
     //if (!_this->storages[dId].in) continue;
     if (load.first >= load.second) break;
-    _this->leastLoaded.pop();
+    //_this->leastLoaded.pop();
     
     uint start = _this->lastAvailable[dId];
     
@@ -995,7 +995,7 @@ inline Locations allocateDefaultLeave(const K &k, Master *_this, set<uint> &st, 
   for (int i = 0; i < count; ++i) {
     uint32_t id = locations.locs[i].dId;
     if (id == uint32_t(-1)) break;  // not found and not deleted
-    _this->leastLoaded.push(id);
+    //_this->leastLoaded.push(id);
   }
   
   return locations;
