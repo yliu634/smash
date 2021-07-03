@@ -938,17 +938,18 @@ inline Locations allocateDefaultLeave(const K &k, Master *_this, set<uint> &st, 
     while(!_this->storages[dId].in && st.count(dId) != 0){
       heap_fallback.push_back(dId);
       _this->leastLoaded.pop();
-      if(_this->leastLoaded.size() < 3){
+      /*if(_this->leastLoaded.size() < 3){
         perror("The storages number low.");
         debug_break();
-      }
+      }*/
       dId = _this->leastLoaded.top();
     }
-    cout << "finally we choose " << dId << endl;
+    cout << "finally we choose " << dId <<"because now st.count(): " << st.count(dId) << endl;
     for(const uint &el: heap_fallback){
       _this->leastLoaded.push(el);
     }
-    
+    cout << "Now the queue size: " _this->leastLoaded.size() << endl;
+      
     pair <uint, uint> &load = _this->loadInfo[dId];
     
     
