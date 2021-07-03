@@ -884,20 +884,9 @@ inline Locations allocateDefault(const K &k, Master *_this, uint8_t count) {
   
   for (int i = 0; i < count; ++i) {
     uint dId = _this->leastLoaded.top();
-    //pair <uint, uint> &load = _this->loadInfo[dId];
+    pair <uint, uint> &load = _this->loadInfo[dId]; 
     
-    while(!_this->storages[dId].in){
-      _this->leastLoaded.pop();
-      if(_this->leastLoaded.size() < 3){
-        perror("The storages number low.");
-        debug_break();
-      }
-      dId = _this->leastLoaded.top();
-    }
-    pair <uint, uint> &load = _this->loadInfo[dId];
-    
-    
-    //if (!_this->storages[dId].in) continue;
+    if (!_this->storages[dId].in) continue;
     if (load.first >= load.second) break;
     _this->leastLoaded.pop();
     
@@ -940,7 +929,14 @@ inline Locations allocateDefaultLeave(const K &k, Master *_this, set<uint> &st, 
     uint dId = _this->leastLoaded.top();
     //pair <uint, uint> &load = _this->loadInfo[dId];
     
-    while(!_this->storages[dId].in){
+    vector<uint> heap_fallback;
+    cout << "st have: " << endl;
+      for (auto it=st.cbegin(); it != st.cend(); ++it)
+        std::cout << ' ' << *it;
+    cout << endl;
+      
+    while(!_this->storages[dId].in && st.count(dId) != 0){
+      heap_fallback.push_back(dId);
       _this->leastLoaded.pop();
       if(_this->leastLoaded.size() < 3){
         perror("The storages number low.");
@@ -948,25 +944,9 @@ inline Locations allocateDefaultLeave(const K &k, Master *_this, set<uint> &st, 
       }
       dId = _this->leastLoaded.top();
     }
-    
-    if(!st.empty()){
-      cout << "st have: " << endl;
-      for (auto it=st.cbegin(); it != st.cend(); ++it)
-        std::cout << ' ' << *it;
-      
-      vector<uint> heap_fallback;
-      while(st.count(dId) != 0){
-        heap_fallback.push_back(dId);
-        cout << "no, did "<< dId <<" have this key" << endl;
-        _this->leastLoaded.erase(dId);
-        cout << "Size: "<<_this->leastLoaded.size()<< endl;
-        assert(_this->leastLoaded.size() > 0);
-        dId = _this->leastLoaded.top();
-      }
-      cout << "finally we choose " << dId << endl;
-      for(const uint &el:heap_fallback){
-        _this->leastLoaded.push(el);
-      }
+    cout << "finally we choose " << dId << endl;
+    for(const uint &el: heap_fallback){
+      _this->leastLoaded.push(el);
     }
     
     pair <uint, uint> &load = _this->loadInfo[dId];
