@@ -881,7 +881,19 @@ inline Locations allocateDefault(const K &k, Master *_this, uint8_t count) {
   
   for (int i = 0; i < count; ++i) {
     uint dId = _this->leastLoaded.top();
+    //pair <uint, uint> &load = _this->loadInfo[dId];
+    
+    while(!_this->storages[dId].in){
+      _this->leastLoaded.pop();
+      //loadInfo[dId].first = 256;
+      //loadInfo[dId].second = 256;
+      if(leastLoaded.size() < 3){
+        perror("The storages number low.");
+      }
+      dId = _this->leastLoaded.top();
+    }
     pair <uint, uint> &load = _this->loadInfo[dId];
+    
     
     if (!_this->storages[dId].in) continue;
     if (load.first >= load.second) break;
