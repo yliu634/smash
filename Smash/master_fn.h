@@ -949,12 +949,19 @@ inline Locations allocateDefaultLeave(const K &k, Master *_this, set<uint> &st, 
     }
     
     if(!st.empty()){
+      std::set<int>::reverse_iterator rit;
+      std::cout << "myset contains: ";
+      for (rit=st.rbegin(); rit != st.rend(); ++rit)
+         std::cout << ' ' << *rit;
+      
       vector<uint> heap_fallback;
       while(st.count(dId) != 0){
         heap_fallback.push_back(dId);
+        cout << "no, did"<< dId <<" have this key" << endl;
         _this->leastLoaded.pop();
         dId = _this->leastLoaded.top();
       }
+      cout << "finally we choose " << dId << endl;
       for(const uint &el:heap_fallback){
         _this->leastLoaded.push(el);
       }
