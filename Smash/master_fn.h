@@ -930,7 +930,7 @@ inline Locations allocateDefault(const K &k, Master *_this, uint8_t count) {
   return locations;
 }
 
-inline Locations allocateDefaultLeave(const K &k, Master *_this, set<uint> &st, uint8_t count = 3) {
+inline Locations allocateDefaultLeave(const K &k, Master *_this, set<uint> &st, uint8_t count) {
   mylock_guard g(_this->loadLock);
   
   Locations locations;
