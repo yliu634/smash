@@ -643,8 +643,8 @@ public:
           while (locs[i].dId != sId && i < 3) ++i;
           
           if (i == 3) continue;
-          
-          locs[i] = allocateDefault(k, this, 1).locs[0];
+          set<uint> st = {locs[0].dId, locs[1].dId, locs[2].dId};
+          locs[i] = allocateDefault(k, this, st, 1).locs[0];
           
           int j = (i + 1) % 3;
           // copy to storage node: j to i
