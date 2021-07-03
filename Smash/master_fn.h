@@ -13,6 +13,7 @@ class Master;
 
 // first available block on the least loaded disk. RESERVE before sending!
 inline Locations allocateDefault(const K &k, Master *_this, uint8_t count = 3);
+inline Locations allocateDefaultLeave(const K &k, Master *_this, uint8_t count = 3, set<uint> & st);
 
 class Master : public Node {
 public:
@@ -608,7 +609,8 @@ public:
         
         if (i == 3) continue;
         
-        locs[i] = allocateDefault(k, this, 1).locs[0];
+        set<uint> st = {locs[0].dId, locs[1].dId, locs[2].dId};
+        locs[i] = allocateDefaultLeave(k, this, 1, st).locs[0];
         
         int j = (i + 1) % 3;
         // copy to storage node: j to i
@@ -927,3 +929,74 @@ inline Locations allocateDefault(const K &k, Master *_this, uint8_t count) {
   
   return locations;
 }
+
+inline Locations allocateDefaultLeave(const K &k, Master *_this, uint8_t count, set<uint> &st) {
+  mylock_guard g(_this->loadLock);
+  
+  Locations locations;
+  
+  for (int i = 0; i < count; ++i) {
+    uint dId = _this->leastLoaded.top();
+    //pair <uint, uint> &load = _this->loadInfo[dId];
+    
+    while(!_this->storages[dId].in){
+      _this->leastLoaded.pop();
+      if(_this->leastLoaded.size() < 3){
+        perror("The storages number low.");
+        debug_break();
+      }
+      dId = _this->leastLoaded.top();
+    }
+    
+    if(!st.empty()){
+      vector<uint> heap_fallback;
+      while(st.count(dId) != 0){
+        heap_fallback.push_back(dId);
+        _this->leastLoaded.pop();
+        dId = _this->leastLoaded.top();
+      }
+      for(const uint &el:heap_fallback){
+        _this->leastLoaded.push(el);
+      }
+    }
+    
+    pair <uint, uint> &load = _this->loadInfo[dId];
+    
+    
+    //if (!_this->storages[dId].in) continue;
+    if (load.first >= load.second) break;
+    _this->leastLoaded.pop();
+    
+    uint start = _this->lastAvailable[dId];
+    
+    uint64_t bitsCnt = _this->allocated[dId].capacity;
+    for (uint cnt = 0; cnt < bitsCnt; ++cnt) {
+      uint bulkId = cnt + start;
+      if (bulkId > bitsCnt) bulkId -= bitsCnt;
+      
+      if (!_this->allocated[dId].memGet(bulkId)) continue;
+      
+      uint blkId = _this->bulkFreeIndex(dId, bulkId);
+      if (blkId != uint(-1)) {
+        _this->lastAvailable[dId] = bulkId;
+        
+        blkId = bulkId * 256U + uint32_t(blkId);
+        _this->occupy(dId, blkId, false);
+        locations.locs[i] = {dId, blkId};
+        break;
+      }
+    }
+  }
+  
+  for (int i = 0; i < count; ++i) {
+    uint32_t id = locations.locs[i].dId;
+    if (id == uint32_t(-1)) break;  // not found and not deleted
+    _this->leastLoaded.push(id);
+  }
+  
+  return locations;
+}
+
+
+
+
