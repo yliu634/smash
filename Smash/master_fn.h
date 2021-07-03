@@ -948,7 +948,7 @@ inline Locations allocateDefaultLeave(const K &k, Master *_this, set<uint> &st, 
     for(const uint &el: heap_fallback){
       _this->leastLoaded.push(el);
     }
-    cout << "Now the queue size: " _this->leastLoaded.size() << endl;
+    cout << "Now the queue size: "<< _this->leastLoaded.size() << endl;
       
     pair <uint, uint> &load = _this->loadInfo[dId];
     
