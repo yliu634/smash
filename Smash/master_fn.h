@@ -13,7 +13,7 @@ class Master;
 
 // first available block on the least loaded disk. RESERVE before sending!
 inline Locations allocateDefault(const K &k, Master *_this, uint8_t count = 3);
-inline Locations allocateDefaultLeave(const K &k, Master *_this, uint8_t count = 3, set<uint> & st = {});
+inline Locations allocateDefaultLeave(const K &k, Master *_this, set<uint> & st, uint8_t count = 3);
 
 class Master : public Node {
 public:
@@ -610,7 +610,7 @@ public:
         if (i == 3) continue;
         
         set<uint> st = {locs[0].dId, locs[1].dId, locs[2].dId};
-        locs[i] = allocateDefaultLeave(k, this, 1, st).locs[0];
+        locs[i] = allocateDefaultLeave(k, this, st, 1).locs[0];
         
         int j = (i + 1) % 3;
         // copy to storage node: j to i
@@ -930,7 +930,7 @@ inline Locations allocateDefault(const K &k, Master *_this, uint8_t count) {
   return locations;
 }
 
-inline Locations allocateDefaultLeave(const K &k, Master *_this, uint8_t count, set<uint> &st) {
+inline Locations allocateDefaultLeave(const K &k, Master *_this, set<uint> &st, uint8_t count = 3) {
   mylock_guard g(_this->loadLock);
   
   Locations locations;
