@@ -13,7 +13,7 @@ class Master;
 
 // first available block on the least loaded disk. RESERVE before sending!
 inline Locations allocateDefault(const K &k, Master *_this, uint8_t count = 3);
-inline Locations allocateDefaultLeave(const K &k, Master *_this, uint8_t count = 3, set<uint> & st);
+inline Locations allocateDefaultLeave(const K &k, Master *_this, uint8_t count = 3, set<uint> & st = {});
 
 class Master : public Node {
 public:
