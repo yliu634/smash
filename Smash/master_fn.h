@@ -620,7 +620,7 @@ public:
         p[0] = locs[j].blkId;
         p[1] = locs[i].dId;
         p[2] = locs[i].blkId;
-        my_write(storages[p[0]].addrPort, Copy, updateMsg);
+        my_write(storages[locs[j].dId].addrPort, Copy, updateMsg);
         
         // send the update to lookups
         updateMsg.resize(1 + sizeof(Locations) + k.length() + 1);
@@ -655,7 +655,7 @@ public:
           p[1] = locs[i].dId;
           p[2] = locs[i].blkId;
           cout << "Copy from " << locs[j].dId << " to " << p[1] <<":"<< p[2] << endl;
-          my_write(storages[p[0]].addrPort, Copy, updateMsg);
+          my_write(storages[locs[j].dId].addrPort, Copy, updateMsg);
           
           // send the update messages to lookups
           updateMsg.resize(1 + 4 + sizeof(Locations));
