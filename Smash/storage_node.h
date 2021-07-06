@@ -87,6 +87,7 @@ public:
   void sendRegisterMsg() override {
     ofstream f("storageReg.txt", ios_base::out | ios_base::app);
       f << "--Reg:---" << date() << "-------" << endl;
+      f.close();
     vector<char> msg;
     msg.resize(6);
     *(uint16_t *) msg.data() = port;
@@ -170,6 +171,7 @@ public:
         
         my_write(storages[dSId].addrPort, Insert, buff);
       } else if (msgType == RegisterReply){
+        ofstream f("Storage.txt", ios_base::out | ios_base::app);
         f << "--Received:--" << date() << "-------" << endl;
         f.close();
       }else {
