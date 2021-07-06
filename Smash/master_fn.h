@@ -790,6 +790,7 @@ public:
           p[0] = locs[j].blkId;
           p[1] = locs[i].dId;
           p[2] = locs[i].blkId;
+          cout << "this addrPort is: " << storages[j].addrPort << endl;
           my_write(storages[j].addrPort, Copy, updateMsg);
           
           // send the update messages to lookups
