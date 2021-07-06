@@ -301,7 +301,7 @@ public:
     return timestring;
   }
   
-  bool silent;
+  bool silent = false;
   void log(const string &s) const {
     if(silent) return;
     
