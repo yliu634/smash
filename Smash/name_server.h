@@ -17,7 +17,7 @@ public:
       string s(msg.begin(), msg.end());
       ostringstream oss;
       oss << " Log request from #" << id << " @ " << ip << ". Log content: " << s;
-      // log(oss.str());
+      log(oss.str());
     } else if (msgType == Leave) {
       uint32_t sId = *(uint32_t *) msg.data();
       for (auto &m: masters) {
