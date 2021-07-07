@@ -19,6 +19,8 @@ public:
       oss << " Log request from #" << id << " @ " << ip << ". Log content: " << s;
       log(oss.str());
     } else if (msgType == Leave) {
+      cout << "Leave operation start at: " << date() << endl;
+      
       uint32_t sId = *(uint32_t *) msg.data();
       for (auto &m: masters) {
         my_write(m.addrPort, Leave, &sId, sizeof(sId));
