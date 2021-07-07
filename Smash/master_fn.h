@@ -843,8 +843,9 @@ public:
         }
       }
       //size *= 4;  // unit: mega bytes; //Size is the number of blocks
-      string tmp = string("Size for storage ") + to_string(did) + string(": ") + to_string(size)+ string(" : ") << to_string(size * 0.01) << string("MB");
-      cout << "# Objects for storage: " << to_string(size) << " : " << to_string(size * 0.01) << "MB" << endl;
+      double memory = size * 0.01;
+      string tmp = string("Size for storage ") + to_string(did) + string(": ") + to_string(size) + string(" : ") << to_string(memory) << string("MB");
+      cout << "# Objects for storage: " << to_string(size) << " : " << to_string(memory) << "MB" << endl;
       my_write(nameServer, Log, tmp);
     } else return false;
     
