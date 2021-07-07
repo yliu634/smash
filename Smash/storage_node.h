@@ -111,7 +111,7 @@ public:
   
   bool onMessage(int msgType, int id, const int fd, const string &ip, vector<char> &msg) override {
     try {
-      if (msgType == RegisterReply) cout << "RegisterSuccess at: " << SocketNode::data() << endl;
+      if (msgType == RegisterReply) cout << "RegisterSuccess at: " << SocketNode::date() << endl;
       if (Node::onMessage(msgType, 0, fd, ip, msg)) return true;
      
       if (msgType == Insert || msgType == Remove) {
