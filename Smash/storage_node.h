@@ -85,7 +85,7 @@ public:
   }
   
   void sendRegisterMsg() override {
-    cout << "RegisterSent at " << date() << endl;
+    cout << "RegisterSent at " << SocketNode::date() << endl;
     vector<char> msg;
     msg.resize(6);
     *(uint16_t *) msg.data() = port;
@@ -111,7 +111,7 @@ public:
   
   bool onMessage(int msgType, int id, const int fd, const string &ip, vector<char> &msg) override {
     try {
-      if (msgType == RegisterReply) cout << "RegisterSuccess at: " << data() << endl;
+      if (msgType == RegisterReply) cout << "RegisterSuccess at: " << SocketNode::data() << endl;
       if (Node::onMessage(msgType, 0, fd, ip, msg)) return true;
      
       if (msgType == Insert || msgType == Remove) {
