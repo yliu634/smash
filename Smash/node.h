@@ -6,7 +6,7 @@
 
 typedef string K;
 //const uint blockSize = 4 * 1024 * 1024;
-const uint blockSize = 1024;
+const uint blockSize = 10 * 1024; //10 KB/object
 
 const int MAX_ADD_LEN = 100;
 
