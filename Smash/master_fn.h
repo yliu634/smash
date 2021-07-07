@@ -839,6 +839,7 @@ public:
       }
       //size *= 4;  // unit: mega bytes //size is the number of blocks (objects)
       string tmp = string("Size for storage ") + to_string(did) + ": " + to_string(size);
+      cout << "Size for storage: " << to_string(size) << endl;
       my_write(nameServer, Log, tmp);
     } else return false;
     
