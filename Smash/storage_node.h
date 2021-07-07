@@ -85,9 +85,7 @@ public:
   }
   
   void sendRegisterMsg() override {
-    ofstream f("storageReg.txt", ios_base::out | ios_base::app);
-      f << "--Reg:---" << date() << "-------" << endl;
-      f.close();
+    cout << "RegisterSent at " << date() << endl;
     vector<char> msg;
     msg.resize(6);
     *(uint16_t *) msg.data() = port;
@@ -113,6 +111,7 @@ public:
   
   bool onMessage(int msgType, int id, const int fd, const string &ip, vector<char> &msg) override {
     try {
+      if (msgType == RegisterReply) cout << "RegisterSuccess at: " << data() << endl;
       if (Node::onMessage(msgType, 0, fd, ip, msg)) return true;
      
       if (msgType == Insert || msgType == Remove) {
@@ -170,11 +169,7 @@ public:
         *(Locations *) buff.data() = onlyFirst;
         
         my_write(storages[dSId].addrPort, Insert, buff);
-      } else if (msgType == RegisterReply){
-        ofstream f("Storage.txt", ios_base::out | ios_base::app);
-        f << "--Received:--" << date() << "-------" << endl;
-        f.close();
-      }else {
+      } else {
         return false;
       }
     } catch (exception &e) {
