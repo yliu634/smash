@@ -933,39 +933,40 @@ inline Locations allocateDefaultLeave(const K &k, Master *_this, set<uint> &st, 
     //pair <uint, uint> &load = _this->loadInfo[dId];
     
     vector<uint> heap_fallback;
+    /*
     cout << "st have: " << endl;
       for (auto it=st.cbegin(); it != st.cend(); ++it)
         std::cout << ' ' << *it;
     cout << endl;
-      
+    */
     while(!_this->storages[dId].in || st.count(dId) != 0){
       heap_fallback.push_back(dId);
-      cout << dId << "is not OK and is pop out." << endl;
+      //cout << dId << "is not OK and is pop out." << endl;
       _this->leastLoaded.pop();
       /*if(_this->leastLoaded.size() < 3){
         perror("The storages number low.");
         debug_break();
-      }*/
+      }
       cout << "heap 1 have: ";
       for (auto it=_this->leastLoaded.begin(); it != _this->leastLoaded.end(); ++it)
         std::cout << ' ' << *it;
       cout << endl;
-      
+      */
       dId = _this->leastLoaded.top();
-      cout << "The top element now is " << dId << endl;
+      //cout << "The top element now is " << dId << endl;
     }
-    cout << "finally we choose " << dId <<"because now st.count(): " << st.count(dId) << endl;
-    cout << "push back to heap: " << endl;
+    //cout << "finally we choose " << dId <<"because now st.count(): " << st.count(dId) << endl;
+    //cout << "push back to heap: " << endl;
     for(const uint &el: heap_fallback){
-      cout << " "<< el;
+      //cout << " "<< el;
       _this->leastLoaded.push(el);
     }
-    cout << endl;
+    //cout << endl;
     
-    cout << "heap 1 have: ";
+    /*cout << "heap 1 have: ";
     for (auto it=_this->leastLoaded.begin(); it != _this->leastLoaded.end(); ++it)
     std::cout << ' ' << *it;
-    cout << endl;
+    cout << endl;*/
     
     pair <uint, uint> &load = _this->loadInfo[dId];
     
