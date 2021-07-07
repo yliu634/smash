@@ -842,8 +842,9 @@ public:
           }
         }
       }
-      size *= 4;  // unit: mega bytes
+      //size *= 4;  // unit: mega bytes; //Size is the number of blocks
       string tmp = string("Size for storage ") + to_string(did) + ": " + to_string(size);
+      cout << "Size for storage: " << to_string(size) << endl;
       my_write(nameServer, Log, tmp);
     } else return false;
     
@@ -1001,7 +1002,3 @@ inline Locations allocateDefaultLeave(const K &k, Master *_this, set<uint> &st, 
   
   return locations;
 }
-
-
-
-
