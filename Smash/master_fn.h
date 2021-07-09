@@ -655,6 +655,7 @@ public:
           
           // send the update messages to lookups
           updateMsg.resize(1 + 4 + sizeof(Locations));
+          //std::this_thread::yield();
           
           *updateMsg.data() = 0;
           uint32_t bs = (bid << 2) + s;
