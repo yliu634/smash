@@ -656,6 +656,7 @@ public:
           p[2] = locs[i].blkId;
           cout << "Copy from " << locs[j].dId << " to " << p[1] <<":"<< p[2] << endl;
           my_write(storages[locs[j].dId].addrPort, Copy, updateMsg);
+          //std::this_thread::yield();
           
           // send the update messages to lookups
           updateMsg.resize(1 + 4 + sizeof(Locations));
