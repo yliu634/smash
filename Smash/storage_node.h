@@ -167,7 +167,7 @@ public:
         *(Locations *) buff.data() = onlyFirst;
         
         my_write(storages[dSId].addrPort, Insert, buff);
-        std::this_thread::yield();
+        //std::this_thread::yield();
       } else {
         return false;
       }
