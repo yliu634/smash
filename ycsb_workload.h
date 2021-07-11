@@ -54,20 +54,29 @@ public:
     C client;
     loadKeys(recordcount);
     Clocker c("run");
+    ofstream fout("dist/res.txt",ios::app);
+    struct timeval t1,t2;
+    double timeuse;
     
     for (int i = id % parallel; i < operationcount; i += parallel) {
       double r = (double) rand() / RAND_MAX;
       string &k = keys[InputBase::rand()];
       
       if (r < readproportion + readmodifywriteproportion) { // read
+        gettimeofday(&t1, NULL);
         buffer = client.Read(k);
+        gettimeofday(&t2, NULL);
       }
       
       if (r > readproportion) {  // update. may read and update
         sprintf((char *) buffer.data(), "%s#%d...", k.c_str(), i);
         client.Update(k, buffer.data());
       }
+      timeuse = (t2.tv_sec-t1.tv_sec)*1000+(double)(t2.tv_usec-t1.tv_usec)/1000.0;
+      fout << timeuse << " ";
     }
+    fout << endl;
+    fout.close();
   }
   
   inline void loadSmash() {
