@@ -104,7 +104,7 @@ public:
       string &k = keys[i];
       
       gettimeofday(&t1, NULL);
-      buffer = client.Remove(k);
+      client.Remove(k);
       gettimeofday(&t2, NULL);
       
       timeuse = (t2.tv_sec-t1.tv_sec)*1000+(double)(t2.tv_usec-t1.tv_usec)/1000.0;
