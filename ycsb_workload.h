@@ -11,7 +11,7 @@ public:
   double readproportion = 0.5;
   double updateproportion = 0.5;
   double readmodifywriteproportion = 0;
-  Distribution requestdistribution = zipfian;
+  Distribution requestdistribution = uniform;
   int parallel = 1;
   int id;
   
@@ -41,7 +41,7 @@ public:
   inline void load() {
     C client;
     loadKeys(recordcount);
-    ofstream fout("dist/res.txt",ios::out);
+    ofstream fout("dist/load.txt",ios::out);
     struct timeval t1, t2;
     double timeuse;
     
@@ -64,7 +64,7 @@ public:
     C client;
     loadKeys(recordcount);
     Clocker c("run");
-    ofstream fout("dist/res.txt",ios::out);
+    ofstream fout("dist/run.txt",ios::out);
     struct timeval t1, t2;
     double timeuse;
     
@@ -96,7 +96,7 @@ public:
     C client;
     loadKeys(recordcount);
     Clocker c("remove");
-    ofstream fout("dist/res.txt",ios::out);
+    ofstream fout("dist/remove.txt",ios::out);
     struct timeval t1, t2;
     double timeuse;
     
@@ -213,10 +213,8 @@ public:
       
       f.close();
     }
-    
     InputBase::setSeed(1);
     InputBase::distribution = requestdistribution;
     InputBase::bound = recordcount;
   }
 };
-
