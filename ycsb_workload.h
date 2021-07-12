@@ -41,12 +41,22 @@ public:
   inline void load() {
     C client;
     loadKeys(recordcount);
+    ofstream fout("dist/res.txt",ios::out);
+    struct timeval t1, t2;
+    double timeuse;
     
     Clocker c("load");
     for (int i = id % parallel; i < recordcount; i += parallel) {
       sprintf((char *) buffer.data(), "%s#%d...", keys[i].c_str(), i);
+      gettimeofday(&t1, NULL);
       client.Insert(keys[i], buffer.data());
+      gettimeofday(&t2, NULL);
+      
+      timeuse = (t2.tv_sec-t1.tv_sec)*1000+(double)(t2.tv_usec-t1.tv_usec)/1000.0;
+      fout << timeuse << " ";
     }
+    //fout << endl;
+    fout.close();
   }
   
   template<class C>
@@ -77,7 +87,7 @@ public:
       timeuse = (t2.tv_sec-t1.tv_sec)*1000+(double)(t2.tv_usec-t1.tv_usec)/1000.0;
       fout << timeuse << " ";
     }
-    fout << endl;
+    //fout << endl;
     fout.close();
   }
   
@@ -100,7 +110,7 @@ public:
       timeuse = (t2.tv_sec-t1.tv_sec)*1000+(double)(t2.tv_usec-t1.tv_usec)/1000.0;
       fout << timeuse << " ";
     }
-    fout << endl;
+    //fout << endl;
     fout.close();
   }
   
