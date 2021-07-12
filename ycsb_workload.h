@@ -122,12 +122,20 @@ public:
     run<Client>();
   }
   
+  inline void removeSmash() {
+    remove<Client>();
+  }
+  
   inline void loadCeph() {
     load<CephClient>();
   }
   
   inline void runCeph() {
     run<CephClient>();
+  }
+  
+  inline void removeCeph() {
+    remove<CephClient>();
   }
   
   YCSB(const string workload, int parallel = 1, int override_records = 1000) : parallel(parallel) {
@@ -141,8 +149,8 @@ public:
     if (workload[0] == 'a') {
       recordcount = override_records;
       operationcount = 1000;
-      readproportion = 0.5;
-      updateproportion = 0.5;
+      readproportion = 1;
+      updateproportion = 0;
 //      scanproportion = 0;
 //      insertproportion = 0;
       requestdistribution = uniform;
@@ -217,4 +225,5 @@ public:
     InputBase::distribution = requestdistribution;
     InputBase::bound = recordcount;
   }
+  
 };
