@@ -55,7 +55,7 @@ public:
     loadKeys(recordcount);
     Clocker c("run");
     ofstream fout("dist/res.txt",ios::out);
-    struct timeval t1,t2;
+    struct timeval t1, t2;
     double timeuse;
     
     for (int i = id % parallel; i < operationcount; i += parallel) {
@@ -74,6 +74,29 @@ public:
         client.Update(k, buffer.data());
         gettimeofday(&t2, NULL);
       }
+      timeuse = (t2.tv_sec-t1.tv_sec)*1000+(double)(t2.tv_usec-t1.tv_usec)/1000.0;
+      fout << timeuse << " ";
+    }
+    fout << endl;
+    fout.close();
+  }
+  
+  template<class C>
+  inline void remove() {
+    C client;
+    loadKeys(recordcount);
+    Clocker c("remove");
+    ofstream fout("dist/res.txt",ios::out);
+    struct timeval t1, t2;
+    double timeuse;
+    
+    for (int i = id % parallel; i < recordcount; i += parallel) {
+      string &k = keys[i];
+      
+      gettimeofday(&t1, NULL);
+      buffer = client.Remove(k);
+      gettimeofday(&t2, NULL);
+      
       timeuse = (t2.tv_sec-t1.tv_sec)*1000+(double)(t2.tv_usec-t1.tv_usec)/1000.0;
       fout << timeuse << " ";
     }
@@ -186,3 +209,4 @@ public:
     InputBase::bound = recordcount;
   }
 };
+
