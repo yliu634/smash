@@ -70,7 +70,9 @@ public:
       
       if (r > readproportion) {  // update. may read and update
         sprintf((char *) buffer.data(), "%s#%d...", k.c_str(), i);
+        gettimeofday(&t1, NULL);
         client.Update(k, buffer.data());
+        gettimeofday(&t2, NULL);
       }
       timeuse = (t2.tv_sec-t1.tv_sec)*1000+(double)(t2.tv_usec-t1.tv_usec)/1000.0;
       fout << timeuse << " ";
@@ -115,8 +117,8 @@ public:
     } else if (workload[0] == 'b') {
       recordcount = override_records;
       operationcount = 1000;
-      readproportion = 0.95;
-      updateproportion = 0.05;
+      readproportion = 0;
+      updateproportion = 1;
 //      scanproportion = 0;
 //      insertproportion = 0;
       requestdistribution = zipfian;
