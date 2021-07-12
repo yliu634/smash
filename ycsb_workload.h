@@ -11,7 +11,7 @@ public:
   double readproportion = 0.5;
   double updateproportion = 0.5;
   double readmodifywriteproportion = 0;
-  Distribution requestdistribution = uniform;
+  Distribution requestdistribution = zipfian;
   int parallel = 1;
   int id;
   
@@ -145,7 +145,7 @@ public:
       updateproportion = 0.5;
 //      scanproportion = 0;
 //      insertproportion = 0;
-      requestdistribution = zipfian;
+      requestdistribution = uniform;
       
     } else if (workload[0] == 'b') {
       recordcount = override_records;
@@ -154,7 +154,7 @@ public:
       updateproportion = 1;
 //      scanproportion = 0;
 //      insertproportion = 0;
-      requestdistribution = zipfian;
+      requestdistribution = uniform;
       
     } else if (workload[0] == 'c') {
       recordcount = override_records;
