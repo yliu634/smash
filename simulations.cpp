@@ -73,6 +73,14 @@ int main(int argc, char **argv) {
     int records = argc == 4 ? 1000 : atoi(argv[4]);
     YCSB y(argv[2], atoi(argv[3]), records);
     y.runSmash();
+  } else if (argv[1] == string("removeC")) {  // ycsb-like interface
+    int records = argc == 4 ? 1000 : atoi(argv[4]);
+    YCSB y(argv[2], atoi(argv[3]), records);
+    y.removeCeph();
+  } else if (argv[1] == string("removeS")) {  // ycsb-like interface
+    int records = argc == 4 ? 1000 : atoi(argv[4]);
+    YCSB y(argv[2], atoi(argv[3]), records);
+    y.removeSmash();
   } else if (argv[1] == string("cmd")) {
     Commander c;
     c.startRoutine();
