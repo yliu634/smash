@@ -54,7 +54,7 @@ public:
     C client;
     loadKeys(recordcount);
     Clocker c("run");
-    ofstream fout("dist/res.txt",ios::app);
+    ofstream fout("dist/res.txt",ios::out);
     struct timeval t1,t2;
     double timeuse;
     
