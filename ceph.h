@@ -97,5 +97,16 @@ public:
     }
     return buffer;
   }
+  
+  void Remove(string &k){
+    int err = rados_remove(io, k.c_str());
+    if (err < 0) {
+      fprintf(stderr, "%s: cannot remove object in pool %s: %s\n", argv[0], poolname, strerror(-err));
+      rados_ioctx_destroy(io);
+      rados_shutdown(cluster);
+      exit(1);
+    }
+  }
+  
 };
 
