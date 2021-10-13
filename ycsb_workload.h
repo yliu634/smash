@@ -17,7 +17,7 @@ public:
   
   vector<char> buffer;  // for sending value
   vector<K> keys;
-  
+   
   void loadKeys(uint32_t size) {
     if (!filesystem::is_regular_file("dist/keys.txt")) {
       cerr << "Key file not present. " << endl;
