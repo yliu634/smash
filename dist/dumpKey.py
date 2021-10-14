@@ -8,6 +8,7 @@ def main(argv):
     of = open("dump_osd_" + str(osd) + ".txt", 'w')
     key = f.readline()
     n = 0
+    i = 0
     while key and n < N:
         p = os.popen('ceph osd map test ' + str(key))
         x = p.readlines()
@@ -17,10 +18,12 @@ def main(argv):
         print(x)
         if osd in x:
             of.write(str(key))
+            i = i + 1
         key = f.readline()
         n = n + 1
     f.close()
     of.close()
+    print(i)
 
 if __name__ == "__main__":
     main(sys.argv[1:])
