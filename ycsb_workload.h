@@ -139,7 +139,7 @@ public:
     remove<CephClient>();
   }
   
-  YCSB(const string workload, int parallel = 1, int override_records = 1000, const string keyfile) : parallel(parallel), keyfile(keyfile) {
+  YCSB(const string workload, int parallel = 1, int override_records = 1000, const string keyfile = "dist/keys.txt") : parallel(parallel), keyfile(keyfile) {
     string host = boost::asio::ip::host_name();
     string ids = host.substr(string("machine").length(), host.find('.'));
     id = atoi(ids.c_str());
