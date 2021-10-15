@@ -59,11 +59,11 @@ int main(int argc, char **argv) {
     simulateClient();
   } else if (argv[1] == string("loadC")) {  // ycsb-like interface
     int records = argc == 4 ? 1000 : atoi(argv[4]);
-    YCSB y(argv[2], atoi(argv[3]), records);
+    YCSB y(argv[2], atoi(argv[3]), records, argv[5]);
     y.loadCeph();
   } else if (argv[1] == string("loadS")) {  // ycsb-like interface
     int records = argc == 4 ? 1000 : atoi(argv[4]);
-    YCSB y(argv[2], atoi(argv[3]), records);
+    YCSB y(argv[2], atoi(argv[3]), records, argv[5]);
     y.loadSmash();
   } else if (argv[1] == string("runC")) {  // ycsb-like interface
     int records = argc == 4 ? 1000 : atoi(argv[4]);
