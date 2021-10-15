@@ -13,13 +13,14 @@ public:
   double readmodifywriteproportion = 0;
   Distribution requestdistribution = zipfian;
   int parallel = 1;
+  string keyfile;
   int id;
   
   vector<char> buffer;  // for sending value
   vector<K> keys;
    
-  void loadKeys(uint32_t size) {
-    if (!filesystem::is_regular_file("dist/keys.txt")) {
+  void loadKeys(uint32_t size, string keyfile) {
+    if (!filesystem::is_regular_file(keyfile)) {
       cerr << "Key file not present. " << endl;
       exit(-1);
     }
@@ -41,7 +42,7 @@ public:
   inline void load() {
     C client;
     loadKeys(recordcount);
-    ofstream fout("dist/load.txt",ios::out);
+    ofstream fout("dist/loadtime.txt",ios::out);
     struct timeval t1, t2;
     double timeuse;
     
@@ -138,7 +139,7 @@ public:
     remove<CephClient>();
   }
   
-  YCSB(const string workload, int parallel = 1, int override_records = 1000) : parallel(parallel) {
+  YCSB(const string workload, int parallel = 1, int override_records = 1000, const string keyfile) : parallel(parallel), keyfile(keyfile) {
     string host = boost::asio::ip::host_name();
     string ids = host.substr(string("machine").length(), host.find('.'));
     id = atoi(ids.c_str());
