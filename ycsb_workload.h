@@ -41,7 +41,7 @@ public:
   template<class C>
   inline void load() {
     C client;
-    loadKeys(recordcount);
+    loadKeys(recordcount, keyfile);
     ofstream fout("dist/loadtime.txt",ios::out);
     struct timeval t1, t2;
     double timeuse;
