@@ -19,8 +19,8 @@ public:
   vector<char> buffer;  // for sending value
   vector<K> keys;
    
-  void loadKeys(uint32_t size, string keyfile) {
-    if (!filesystem::is_regular_file(keyfile)) {
+  void loadKeys(uint32_t size, string file = keyfile) {
+    if (!filesystem::is_regular_file(file)) {
       cerr << "Key file not present. " << endl;
       exit(-1);
     }
@@ -41,7 +41,7 @@ public:
   template<class C>
   inline void load() {
     C client;
-    loadKeys(recordcount, keyfile);
+    loadKeys(recordcount);
     ofstream fout("dist/loadtime.txt",ios::out);
     struct timeval t1, t2;
     double timeuse;
