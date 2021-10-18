@@ -596,7 +596,7 @@ public:
       // direct the data move. Just for performance test, and do not maintain whole system consistency.
       uint32_t sId = *(uint32_t *) msg.data();
       storages[sId].in = false;
-      //leastLoaded.erase(sId);
+      leastLoaded.erase(sId);
       
       vector <u_char> updateMsg;
       updateMsg.reserve(500);
