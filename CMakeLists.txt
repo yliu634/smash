@@ -46,6 +46,7 @@ set(COMMON_SOURCE_FILES
   utils/hashutil.cc
   input/input_types.cpp
   ycsb_workload.h
+  utils/ycsbrand.h
   )
 
 set(HEADER_FILES
