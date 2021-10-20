@@ -6,8 +6,6 @@
 #include "utils/ycsbrand.h"
 
 class YCSB {
-private:
-  ZipfianGenerator Z(0, 100, 0.99);
 public:
   int recordcount = 1000;
   int operationcount = 1000;
