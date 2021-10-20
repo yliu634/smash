@@ -76,7 +76,7 @@ public:
       if(requestdistribution == uniform)
         string &k = keys[InputBase::rand()];
       else
-        string &k = keys[zip.getvalue()];
+        string &k = keys[zip.getValue()];
       if (r < readproportion + readmodifywriteproportion) { // read
         gettimeofday(&t1, NULL);
         buffer = client.Read(k);
