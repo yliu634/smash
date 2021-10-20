@@ -3,7 +3,7 @@
 #include "ceph.h"
 #include <boost/asio/ip/host_name.hpp>
 #include <experimental/filesystem>
-#include "utils/ycsbrand/h"
+#include "utils/ycsbrand.h"
 
 class YCSB {
 public:
