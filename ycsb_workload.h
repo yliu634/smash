@@ -13,7 +13,7 @@ public:
   double updateproportion = 0.5;
   double readmodifywriteproportion = 0;
   Distribution requestdistribution = zipfian;
-  ZipfianGenerator zip(0, recordcount, 0.9);
+  //ZipfianGenerator zip(0, recordcount, 0.9);
   int parallel = 1;
   string keyfile;
   int id;
@@ -73,10 +73,7 @@ public:
     
     for (int i = id % parallel; i < operationcount; i += parallel) {
       double r = (double) rand() / RAND_MAX;
-      if(requestdistribution == uniform)
         string &k = keys[InputBase::rand()];
-      else
-        string &k = keys[zip.getValue()];
       if (r < readproportion + readmodifywriteproportion) { // read
         gettimeofday(&t1, NULL);
         buffer = client.Read(k);
@@ -220,7 +217,6 @@ public:
       f >> s;
       if (s == "zipfian") {
         requestdistribution = zipfian;
-        zip.updateParas(0, recordcount, zipconst);
       } else {
         requestdistribution = uniform;
       }
