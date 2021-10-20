@@ -12,6 +12,7 @@ public:
   double updateproportion = 0.5;
   double readmodifywriteproportion = 0;
   Distribution requestdistribution = zipfian;
+  Zip
   int parallel = 1;
   string keyfile;
   int id;
@@ -139,7 +140,7 @@ public:
     remove<CephClient>();
   }
   
-  YCSB(const string workload, int parallel = 1, int override_records = 1000, const string keyfile = "dist/keys.txt") : parallel(parallel), keyfile(keyfile) {
+  YCSB(const string workload, int parallel = 1, int override_records = 1000, const string keyfile = "dist/keys.txt", const double zipconst = 0.99) : parallel(parallel), keyfile(keyfile) {
     string host = boost::asio::ip::host_name();
     string ids = host.substr(string("machine").length(), host.find('.'));
     id = atoi(ids.c_str());
@@ -216,6 +217,7 @@ public:
       f >> s;
       if (s == "zipfian") {
         requestdistribution = zipfian;
+        ZipfianGenerator z(0, override_records, zipconst);
       } else {
         requestdistribution = uniform;
       }
