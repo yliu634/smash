@@ -60,6 +60,7 @@ set(HEADER_FILES
   utils/json.hpp
   utils/debugbreak.h
   utils/fibonacci_queue.h
+  utils/ycsbrand.h
   input/input_types.h
   BloomFilter/bloom_filter.h
   Othello/othello_cp_dp.h
