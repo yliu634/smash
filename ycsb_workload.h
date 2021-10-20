@@ -13,7 +13,7 @@ public:
   double updateproportion = 0.5;
   double readmodifywriteproportion = 0;
   Distribution requestdistribution = zipfian;
-  ZipfianGenerator Z(0, 100, 0.99);
+  RandomGenerator::ZipfianGenerator Z(0, 100, 0.99);
   int parallel = 1;
   string keyfile;
   int id;
