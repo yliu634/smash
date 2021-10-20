@@ -160,6 +160,21 @@ public:
         _items = max-min+1;
         _eta = (1 - pow(2.0 / _items, 1 - _zipfianconstant)) / (1 - _zeta2theta / _zetan);
     }
+    
+    void updateParas(uint64_t min, uint64_t max, double zipfianconst) { //update all parameters as well
+        _zipfianconstant = zipfianconst;
+        if(max-min+1==_items){
+            _min = min; // only changing min is enough
+            return;
+        } else if(max-min+1>_items){
+            _zetan = computeZetan(max-min+1,_zipfianconstant,_zetan,_items); //update zetan
+        } else {
+            _zetan = computeZetan(max-min+1,_zipfianconstant); // recompute zetan
+        }
+        _min = min;
+        _items = max-min+1;
+        _eta = (1 - pow(2.0 / _items, 1 - _zipfianconstant)) / (1 - _zeta2theta / _zetan);
+    }
 
     uint64_t getMaxValue() override {
         return _min+_items-1;
