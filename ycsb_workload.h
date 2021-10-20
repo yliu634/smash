@@ -159,29 +159,29 @@ public:
     } else if (workload[0] == 'b') {
       recordcount = override_records;
       operationcount = 1000;
-      readproportion = 0;
-      updateproportion = 1;
-//      scanproportion = 0;
-//      insertproportion = 0;
-      requestdistribution = uniform;
-      
-    } else if (workload[0] == 'c') {
-      recordcount = override_records;
-      operationcount = 1000;
       readproportion = 1;
       updateproportion = 0;
 //      scanproportion = 0;
 //      insertproportion = 0;
       requestdistribution = zipfian;
-//    } else if (workload[0] == 'd') {
-//      recordcount = 1000;
-//      operationcount = 1000;
-//      readproportion = 0.95;
-//      updateproportion = 0;
+      
+    } else if (workload[0] == 'c') {
+      recordcount = override_records;
+      operationcount = 1000;
+      readproportion = 0;
+      updateproportion = 1;
 //      scanproportion = 0;
-//      insertproportion = 0.05;
-//      requestdistribution = latest;
-//
+//      insertproportion = 0;
+      requestdistribution = uniform;
+    } else if (workload[0] == 'd') {
+      recordcount = override_records;
+      operationcount = 1000;
+      readproportion = 0;
+      updateproportion = 1;
+      //scanproportion = 0;
+      //insertproportion = 0;
+      requestdistribution = zipfian;
+
 //    } else if (workload[0] == 'e') {
 //      recordcount = 1000;
 //      operationcount = 1000;
