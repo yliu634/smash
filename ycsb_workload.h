@@ -6,6 +6,8 @@
 #include "utils/ycsbrand.h"
 
 class YCSB {
+private:
+  ZipfianGenerator Z(0, 100, 0.99);
 public:
   int recordcount = 1000;
   int operationcount = 1000;
@@ -13,7 +15,6 @@ public:
   double updateproportion = 0.5;
   double readmodifywriteproportion = 0;
   Distribution requestdistribution = zipfian;
-  ZipfianGenerator Z((int)(0), (int)(100), (double)(0.9));
   int parallel = 1;
   string keyfile;
   int id;
