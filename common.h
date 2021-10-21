@@ -109,16 +109,35 @@ class zipf_distribution {
 public:
   typedef RealType input_type;
   typedef IntType result_type;
-  
+
   static_assert(std::numeric_limits<IntType>::is_integer, "");
   static_assert(!std::numeric_limits<RealType>::is_integer, "");
   
-  zipf_distribution(const IntType n = std::numeric_limits<IntType>::max(),
+  zipf_distribution(const double zipfianconstant = 0.99, const IntType n = std::numeric_limits<IntType>::max(),
                     const RealType q = 1.0)
-      : n(n), q(q), H_x1(H(1.5) - 1.0), H_n(H(n + 0.5)), dist(H_x1, H_n) {}
+      : n(n), q(q), H_x1(H(1.5) - 1.0), H_n(H(n + 0.5)), dist(H_x1, H_n), _zipfianconstant(zipfianconstant),_generator(0),_dist(0,1) {
+
+        _min = 0; _max = 65535; _items = _max - _min + 1;
+        _zetan = computeZetan(_max-_min, _zipfianconstant);
+        double _zeta2theta = computeZetan(2,_zipfianconstant);
+        _alpha = 1.0 / (1.0 - _zipfianconstant);
+        _eta = (1 - pow(2.0 / _items, 1 - _zipfianconstant)) / (1 - _zeta2theta / _zetan);
+
+      }
   
   IntType operator()(std::default_random_engine &rng) {
-    while (true) {
+    double u = _dist(_generator);
+    double uz = u * _zetan;
+    if (uz < 1.0) {
+        return _min;
+    }
+    if (uz < 1.0 + pow(0.5, _zipfianconstant)) {
+        return _min + 1;
+    }
+    uint64_t ret = _min + (uint64_t) ((_items) * pow(_eta * u - _eta + 1, _alpha));
+    return ret;
+
+    /*while (true) {
       const RealType u = dist(rng);
       const RealType x = H_inv(u);
       const IntType k = clamp<IntType>(std::round(x), 1, n);
@@ -126,9 +145,29 @@ public:
         return k;
       }
     }
+    */
+  }
+
+  // compute parameter zeta given n and zipfianconstant
+  // compute parameter incrementally when n increases
+  double computeZetan(uint64_t n, double zipfianconstant, double oldZeta=0, uint64_t oldn=0){
+      double zetan = oldZeta;
+
+      for(uint64_t i=oldn; i<n; i++){
+          zetan += 1.0/(pow(i + 1, zipfianconstant));
+      }
+
+      return zetan;
   }
 
 private:
+  IntType _min, _max;
+  std::mt19937 _generator;
+  std::uniform_real_distribution<> _dist; // to generate number between 0 and 1
+  uint64_t _items; // total items
+  double _zipfianconstant; // zipfian constant used
+  double _zeta2theta, _zetan, _alpha, _eta;
+
   /** Clamp x to [min, max]. */
   template<typename T>
   static constexpr T clamp(const T x, const T min, const T max) {
@@ -535,3 +574,4 @@ private:
 void printCurrentDateAndTime();
 
 void error(const char *msg);
+
