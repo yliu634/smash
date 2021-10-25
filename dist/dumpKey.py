@@ -17,6 +17,7 @@ def main(argv):
         # print(x[0] + x[1])
         print(x)
         if osd in x:
+        # if osd == x[0]:
             of.write(str(key))
             i = i + 1
         key = f.readline()
