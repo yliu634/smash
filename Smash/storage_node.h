@@ -142,17 +142,19 @@ public:
       } else if (msgType == Read) {
         uint32_t seq = *(uint32_t *) msg.data();
         uint64_t blkId = *((uint32_t *) msg.data() + 1);
+        cout << "receistorage" << endl;
         acc(blkId);
         
         vector<char> buff(blockSize);
         mylock_guard g(locks[blkId % 8192]);
         pread(storageFile, buff.data(), blockSize, blkId * blockSize);
-
+        cout << "after pread" << endl;
 //      if (notValid) {   // not implemented. if the wrong value, return. should in some way store the full key
 //        buff.resize(1);
 //      }
         
         my_write(msg.data() + 8, seq, buff);
+        cout << "after sent" << endl;
       } else if (msgType == Copy || msgType == Move) {
         uint32_t *p = (uint32_t *) msg.data();
         
