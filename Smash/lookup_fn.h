@@ -55,7 +55,7 @@ public:
         uint32_t seq = p[0];
         uint16_t port = p[1];
         string clientAddr = ip + ":" + to_string(port);
-        
+        cout << "rece read" << endl;
         string k = msg.data() + 8;
 //      Location loc = locate(k).locs[rand() % nReplicas];
         Location loc;
@@ -71,8 +71,9 @@ public:
         p[0] = seq;
         p[1] = loc.blkId;
         memcpy(msg.data() + 8, clientAddr.data(), clientAddr.size() + 1);
-        
+        cout << "memcy" << endl;
         my_write(storages[loc.dId].addrPort, Read, msg);
+        cout << "sent" << endl;
       } else if (msgType == MessageTypes::Locate) {
         string k = msg.data();
         Locations locations = locate(k);
