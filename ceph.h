@@ -72,7 +72,7 @@ public:
   }
   
   void Insert(string &k, char *data) {
-    int tmp = 5
+    int tmp = 5;
     for(int i = 0; i<3;i++){
       if(i > tmp)
         tmp-=1;
@@ -92,7 +92,7 @@ public:
   }
   
   vector<char> Read(string &k) {
-    int tmp = 5
+    int tmp = 5;
     for(int i = 0; i<3;i++){
       if(i > tmp)
         tmp-=1;
@@ -109,7 +109,7 @@ public:
   }
   
   void Remove(string &k){
-    int tmp = 5
+    int tmp = 5;
     for(int i = 0; i<3;i++){
       if(i > tmp)
         tmp-=1;
