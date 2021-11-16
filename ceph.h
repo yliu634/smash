@@ -72,6 +72,11 @@ public:
   }
   
   void Insert(string &k, char *data) {
+    int tmp = 5
+    for(int i = 0; i<3;i++){
+      if(i > tmp)
+        tmp-=1;
+    }
     int err = rados_write_full(io, k.c_str(), data, blockSize);
 
     if (err < 0) {
@@ -87,6 +92,11 @@ public:
   }
   
   vector<char> Read(string &k) {
+    int tmp = 5
+    for(int i = 0; i<3;i++){
+      if(i > tmp)
+        tmp-=1;
+    }
     int err = rados_read(io, k.c_str(), buffer.data(), blockSize, 0);
 
     if (err < 0) {
@@ -99,6 +109,11 @@ public:
   }
   
   void Remove(string &k){
+    int tmp = 5
+    for(int i = 0; i<3;i++){
+      if(i > tmp)
+        tmp-=1;
+    }
     int err = rados_remove(io, k.c_str());
     if (err < 0) {
       fprintf(stderr, "%s: cannot remove object in pool %s: %s\n", argv[0], poolname, strerror(-err));
