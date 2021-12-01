@@ -51,6 +51,9 @@ public:
       if (Node::onMessage(msgType, id, fd, ip, msg)) return true;
       
       if (msgType == Read) {
+        struct timeval t1, t2;
+        double timeuse;
+        gettimeofday(&t1, NULL);
         uint32_t *p = (uint32_t *) msg.data();
         uint32_t seq = p[0];
         uint16_t port = p[1];
@@ -73,6 +76,9 @@ public:
         memcpy(msg.data() + 8, clientAddr.data(), clientAddr.size() + 1);
         
         my_write(storages[loc.dId].addrPort, Read, msg);
+        gettimeofday(&t2, NULL);
+        timeuse = (t2.tv_sec-t1.tv_sec)*1000+(double)(t2.tv_usec-t1.tv_usec)/1000.0;
+        cout << timeuse << endl;
       } else if (msgType == MessageTypes::Locate) {
         string k = msg.data();
         Locations locations = locate(k);
