@@ -114,6 +114,46 @@ public:
     fout.close();
   }
   
+  template<class C>
+  inline void runqueue() {
+    Clocker c("run");
+    loadKeys(recordcount);
+    ofstream fout("dist/run.txt", ios::out);
+    struct timeval t1, t2;
+    double timeuse;
+    
+    int nn = 3;
+    vector<C> clientqueue;
+    for (int i = 0; i<nn;i++){
+      C tmp;
+      clientqueue.push_back(tmp);
+    }
+
+    for (int i = id % parallel; i < operationcount; i += parallel) {
+      double r = (double) rand() / RAND_MAX;
+      string &k = keys[InputBase::rand()];
+      
+      auto tmp = clientqueue[i%nn];
+
+      if (r < readproportion + readmodifywriteproportion) { // read
+        gettimeofday(&t1, NULL);
+        buffer = tmp.Read(k);
+        gettimeofday(&t2, NULL);
+      }
+      
+      if (r > readproportion) {  // update. may read and update
+        sprintf((char *) buffer.data(), "%s#%d...", k.c_str(), i);
+        gettimeofday(&t1, NULL);
+        tmp.Update(k, buffer.data());
+        gettimeofday(&t2, NULL);
+      }
+      timeuse = (t2.tv_sec-t1.tv_sec)*1000+(double)(t2.tv_usec-t1.tv_usec)/1000.0;
+      fout << timeuse << " ";
+    }
+    //fout << endl;
+    fout.close();
+  }
+  
   inline void loadSmash() {
     load<Client>();
   }
