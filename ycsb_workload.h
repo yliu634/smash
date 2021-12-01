@@ -133,18 +133,18 @@ public:
       double r = (double) rand() / RAND_MAX;
       string &k = keys[InputBase::rand()];
       
-      auto tmp = clientqueue[i%nn];
+      
 
       if (r < readproportion + readmodifywriteproportion) { // read
         gettimeofday(&t1, NULL);
-        buffer = tmp.Read(k);
+        buffer = clientqueue[i%nn].Read(k);
         gettimeofday(&t2, NULL);
       }
       
       if (r > readproportion) {  // update. may read and update
         sprintf((char *) buffer.data(), "%s#%d...", k.c_str(), i);
         gettimeofday(&t1, NULL);
-        tmp.Update(k, buffer.data());
+        clientqueue[i%nn].Update(k, buffer.data());
         gettimeofday(&t2, NULL);
       }
       timeuse = (t2.tv_sec-t1.tv_sec)*1000+(double)(t2.tv_usec-t1.tv_usec)/1000.0;
