@@ -46,8 +46,8 @@ public:
 
 //// log("Start reading key: " + k);
 
-    while (result.size() != blockSize) {  // master/lookup may be not fully constructed
-      if (result.size()) this_thread::sleep_for(1s);
+    //while (result.size() != blockSize) {  // master/lookup may be not fully constructed
+      //if (result.size()) this_thread::sleep_for(1s);
 
       uint lId = getAnyLookupNode(k);
 
@@ -61,7 +61,7 @@ public:
       memcpy(msg.data() + 8, k.data(), k.length() + 1);
 
       my_write(lookups[lId].addrPort, MessageTypes::Read, msg);
-
+      /*
       for (int count = 0; count <
                           5; ++count) {  // use triangle communication, so the answer is not available via the current duplex TCP channel.
         this_thread::sleep_for(20ms);
@@ -73,8 +73,8 @@ public:
           commitBuffer.erase(it);
           break;
         }
-      }
-    }
+      }*/
+    //}
 
 //// log("End reading key: " + k);
     return result;
