@@ -159,7 +159,7 @@ public:
   }
   
   inline void runSmash() {
-    run<Client>();
+    runqueue<Client>();
   }
   
   inline void removeSmash() {
